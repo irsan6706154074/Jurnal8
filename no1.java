@@ -1,23 +1,35 @@
 import java.io.*;
 	import java.util.Scanner;
-public class no1 {
-	
-       public static void main(String[]args) {
-        Scanner gampang = new Scanner(System.in);
-        System.out.print("Masukan Nilai : ");
-        int masukan= gampang.nextInt();
-        long fib[] = new long[masukan];
-         
-        fib[0] = 0;
-        fib[1] = 1;
-         
-        for(int i = 2; i < masukan; i++) {
-            fib[i] = fib[i-1] + fib[i-2];
+public class Fibonacci {
+    private int[] a;
+
+    private int fib(int i) {
+        assert (i>=0);
+
+        if (a[i]==0) {
+            if (i==0 || i==1) {
+                a[i] = 1;
+            } else {
+                a[i] = fib(i - 2) + fib(i - 1);
+            }
         }
-         
-        for (int i = 0; i < masukan; i++) {
-            System.out.print(fib[i] +  " ");
+
+        return a[i];
+    }
+
+    public Fibonacci(int numberTerms) {
+        if (numberTerms<2) throw new IllegalArgumentException("expect at least 2 terms for a Fibonacci sequence");
+        a = new int[numberTerms];
+    }
+
+    public void print() {
+        for (int i=a.length; i!=0; i--) {
+            System.out.println(fib(i-1));
         }
     }
- 
+
+    public static void main(String[] args) {
+        Fibonacci f = new Fibonacci(7);
+        f.print();
+    }
 }
